@@ -1,0 +1,438 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    background: #080808;
+    color: white;
+}
+
+
+canvas {
+    display: block;
+}
+
+/* =========================
+   LOADING
+========================= */
+
+#loading {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #080808;
+    color: white;
+
+    z-index: 1000;
+
+    font-size: 20px;
+}
+
+/* =========================
+   START SCREEN
+========================= */
+
+#startScreen {
+    position: fixed;
+
+    inset: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(80, 60, 40, 0.35),
+            #050505 70%
+        );
+
+    z-index: 100;
+}
+
+#startScreen h1 {
+    font-size: 55px;
+    letter-spacing: 8px;
+    margin-bottom: 10px;
+}
+
+#startScreen p {
+    color: #cfcfcf;
+    max-width: 450px;
+    line-height: 1.6;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+}
+
+#startButton {
+    margin-top: 25px;
+
+    padding: 15px 35px;
+
+    background: #c49a63;
+    color: #111;
+
+    font-weight: bold;
+    letter-spacing: 2px;
+
+    border-radius: 4px;
+}
+
+/* =========================
+   GAME UI
+========================= */
+
+#gameUI {
+    position: fixed;
+
+    top: 20px;
+    left: 20px;
+    right: 20px;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    z-index: 20;
+
+    pointer-events: none;
+}
+
+#timer,
+#roomName,
+#inventoryButton,
+#hintButton,
+#pauseButton {
+    pointer-events: auto;
+}
+
+#timer {
+    background: rgba(0,0,0,0.65);
+    padding: 10px 15px;
+
+    border-radius: 5px;
+
+    font-weight: bold;
+}
+
+#roomName {
+    background: rgba(0,0,0,0.65);
+    padding: 10px 15px;
+
+    flex: 1;
+
+    text-align: center;
+
+    letter-spacing: 2px;
+}
+
+#inventoryButton,
+#hintButton,
+#pauseButton {
+    width: 45px;
+    height: 45px;
+
+    background: rgba(0,0,0,0.7);
+
+    color: white;
+
+    border-radius: 6px;
+
+    font-size: 20px;
+}
+
+/* =========================
+   INTERACTION
+========================= */
+
+#interactionText {
+    position: fixed;
+
+    bottom: 130px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    background: rgba(0,0,0,0.75);
+
+    padding: 10px 20px;
+
+    border-radius: 5px;
+
+    display: none;
+
+    z-index: 20;
+}
+
+#interactButton {
+    position: fixed;
+
+    right: 25px;
+    bottom: 35px;
+
+    width: 90px;
+    height: 90px;
+
+    border-radius: 50%;
+
+    background: rgba(190,150,90,0.9);
+
+    color: #111;
+
+    font-weight: bold;
+
+    z-index: 30;
+}
+
+/* =========================
+   JOYSTICK
+========================= */
+
+#joystick {
+    position: fixed;
+
+    left: 25px;
+    bottom: 35px;
+
+    width: 110px;
+    height: 110px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.08);
+
+    border: 2px solid rgba(255,255,255,0.15);
+
+    z-index: 30;
+}
+
+#joystickKnob {
+    position: absolute;
+
+    width: 45px;
+    height: 45px;
+
+    left: 30px;
+    top: 30px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.35);
+}
+
+/* =========================
+   CONTROLS
+========================= */
+
+#controls,
+#inventory,
+#pauseMenu,
+#gameOver,
+#victory {
+    position: fixed;
+
+    inset: 0;
+
+    display: none;
+
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    background: rgba(0,0,0,0.88);
+
+    z-index: 200;
+}
+
+#controls button,
+#inventory button,
+#pauseMenu button,
+#gameOver button,
+#victory button {
+    padding: 12px 25px;
+
+    margin-top: 15px;
+
+    background: #c49a63;
+
+    color: #111;
+
+    font-weight: bold;
+
+    border-radius: 4px;
+}
+
+/* =========================
+   PUZZLE PANEL
+========================= */
+
+#puzzlePanel {
+    position: fixed;
+
+    inset: 0;
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(0,0,0,0.72);
+
+    backdrop-filter: blur(5px);
+
+    z-index: 500;
+}
+
+#puzzleBox {
+    position: relative;
+
+    width: min(90%, 520px);
+
+    padding: 35px;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #211b16,
+            #0f0e0c
+        );
+
+    border: 1px solid rgba(214,170,110,0.4);
+
+    box-shadow:
+        0 20px 70px rgba(0,0,0,0.8);
+
+    text-align: center;
+}
+
+#closePuzzle {
+    position: absolute;
+
+    top: 12px;
+    right: 15px;
+
+    background: transparent;
+
+    color: #aaa;
+
+    font-size: 22px;
+}
+
+#puzzleIcon {
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+
+#puzzleTitle {
+    color: #d8b27b;
+}
+
+#puzzleDescription {
+    color: #ccc;
+    line-height: 1.6;
+}
+
+#puzzleClue {
+    margin: 20px 0;
+
+    padding: 15px;
+
+    background: rgba(255,255,255,0.05);
+
+    border-left: 3px solid #c49a63;
+
+    color: #e5e5e5;
+
+    line-height: 1.6;
+}
+
+#puzzleAnswer {
+    width: 100%;
+
+    padding: 13px;
+
+    margin-top: 10px;
+
+    background: #090909;
+
+    border: 1px solid #555;
+
+    color: white;
+
+    border-radius: 4px;
+
+    outline: none;
+}
+
+#submitPuzzle {
+    width: 100%;
+
+    margin-top: 12px;
+
+    padding: 13px;
+
+    background: #c49a63;
+
+    color: #111;
+
+    font-weight: bold;
+
+    border-radius: 4px;
+}
+
+#puzzleMessage {
+    min-height: 20px;
+
+    color: #d8b27b;
+
+    margin-top: 15px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (min-width: 769px) {
+
+    #joystick,
+    #interactButton {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+
+    #startScreen h1 {
+        font-size: 38px;
+    }
+
+    #gameUI {
+        top: 10px;
+        left: 10px;
+        right: 10px;
+    }
+
+    #roomName {
+        font-size: 12px;
+    }
+}
